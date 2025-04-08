@@ -1,0 +1,30 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    a{
+      color: rgb(85, 85, 245);
+    }
+   
+  </style>
+</head>
+<body>
+  <h2 style="color: red;">Prediction: {{ result }}</h2>
+
+<p>Confidence: {{ confidence }}</p>
+
+{% if articles %}
+  <h3>Related Articles:</h3>
+  <ul >
+    {% for article in articles %}
+      <li><a href="{{ article }}" target="_blank" style="color: violet;">{{ article }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</body>
+</html>
