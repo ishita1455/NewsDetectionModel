@@ -3,14 +3,19 @@ from predict import predict_news
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
+@app.route('/')
 def index():
-    prediction = None
-    input_text = ""
-    if request.method == "POST":
-        input_text = request.form.get("news")
-        prediction = predict_news(input_text)
-    return render_template("index.html", prediction=prediction, news=input_text)
+    return render_template('index.html')
 
-if __name__ == "__main__":
+@app.route('/predict', methods=['POST'])
+def predict():
+    input_text = request.form['news']
+    output = predict_news(input_text)
+    return render_template('index.html',
+                           prediction=output['result'],
+                           confidence=output['confidence'],
+                           articles=output['related_articles'],
+                           news=input_text)
+
+if __name__ == '__main__':
     app.run(debug=True)
